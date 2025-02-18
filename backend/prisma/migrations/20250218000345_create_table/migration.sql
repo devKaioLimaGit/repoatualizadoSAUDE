@@ -1,0 +1,30 @@
+-- CreateTable
+CREATE TABLE `User` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+    `protocol` VARCHAR(191) NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `mother` VARCHAR(191) NOT NULL,
+    `rg` VARCHAR(191) NOT NULL,
+    `cpf` VARCHAR(191) NOT NULL,
+    `tel` VARCHAR(191) NOT NULL,
+    `zip` VARCHAR(191) NOT NULL,
+    `address` VARCHAR(191) NOT NULL,
+    `city` VARCHAR(191) NOT NULL,
+    `bairro` VARCHAR(191) NOT NULL,
+    `birth` VARCHAR(191) NOT NULL,
+    `ageinyears` VARCHAR(191) NOT NULL,
+    `position` VARCHAR(191) NOT NULL,
+    `experienceExit` VARCHAR(191) NOT NULL,
+    `experience` VARCHAR(191) NOT NULL,
+    `registrationCouncil` VARCHAR(191) NOT NULL,
+    `deficiency` VARCHAR(191) NOT NULL,
+    `deficiencyContext` VARCHAR(191) NULL,
+    `swornStatement` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `User_email_key`(`email`),
+    UNIQUE INDEX `User_rg_key`(`rg`),
+    UNIQUE INDEX `User_cpf_key`(`cpf`),
+    UNIQUE INDEX `User_tel_key`(`tel`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
