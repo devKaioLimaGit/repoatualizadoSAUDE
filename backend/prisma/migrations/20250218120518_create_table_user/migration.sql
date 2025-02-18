@@ -9,8 +9,8 @@ CREATE TABLE `User` (
     `cpf` VARCHAR(191) NOT NULL,
     `tel` VARCHAR(191) NOT NULL,
     `zip` VARCHAR(191) NOT NULL,
-    `city` VARCHAR(191) NULL,
-    `neighborhood` VARCHAR(191) NULL,
+    `city` VARCHAR(191) NOT NULL,
+    `neighborhood` VARCHAR(191) NOT NULL,
     `birth` VARCHAR(191) NOT NULL,
     `ageinyears` VARCHAR(191) NOT NULL,
     `position` VARCHAR(191) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE `User` (
     `deficiency` VARCHAR(191) NOT NULL,
     `deficiencyContext` VARCHAR(191) NOT NULL,
     `swornStatement` VARCHAR(191) NOT NULL,
-    `address` VARCHAR(191) NULL,
+    `address` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)

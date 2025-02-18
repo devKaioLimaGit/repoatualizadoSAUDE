@@ -34,7 +34,7 @@ async function handleSendEmail(e) {
   const experience = document.getElementById("experience").value.trim();
   const registrationCouncil = document.getElementById("registrationCouncil").value.trim();
   const deficiency = document.getElementById("deficiency").value.trim();
-
+  const container = document.querySelector(".container")
   // Validação de campos obrigatórios
   if (!name || !mother || !email || !rg || !cpf || !tel || !zip || !birth || !ageinyears || !position || !experienceExit || !experience || !registrationCouncil) {
     Toastify({
@@ -56,25 +56,32 @@ async function handleSendEmail(e) {
   }
 
   const formData = new FormData(e.target);
-
   try {
     const response = await fetch("http://localhost:3000/send", {
       method: "POST",
       body: formData, // Envia o objeto FormData diretamente
     });
-
+  
     if (response.ok) {
       const responseData = await response.json(); // Alterei de 'data' para 'responseData'
       console.log(responseData);
       Toastify({
-        text: `Cadastro realizado com sucesso seu protocolo é : ${responseData} `,
+        text: `Cadastro realizado com sucesso seu protocolo é : ${responseData}`,
         backgroundColor: "linear-gradient(to right, #4caf50, #81c784)",
         duration: 100000,
       }).showToast();
       e.target.reset(); // Limpa o formulário após o envio
+      container.classList.remove("container")
+      container.classList.add("container-model")
+      container.innerHTML = `
+        <div class="model">
+          <h1>INSCRIÇÃO REALIZADA COM SUCESSO!</h1>
+          <h2>Protocolo: ${responseData}</h2>
+        </div>
+      `;
     } else {
       Toastify({
-        text: "Ocorreu um erro ao enviar a solicitação.",
+        text: "Candidato já inscrito.",
         backgroundColor: "linear-gradient(to right, #f44336, #e57373)",
         duration: 3000,
       }).showToast();

@@ -40,6 +40,17 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+.container-model{
+    display: flex;
+    justify-content: center;
+    max-width: 960px;
+    height: 100vh;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
 
 .form-group {
     margin-bottom: 1.5rem;
@@ -98,7 +109,7 @@ body {
 }
 
 footer {
-    background-color: #343a40;
+    background-color:#007bff;;
     color: #fff;
     text-align: center;
     padding: 1rem 0;
@@ -157,5 +168,53 @@ footer {
 }
 
 .file-input::file-selector-button:hover {
+    background-color: #0056b3;
+}
+
+.form-term{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.form-term > input{
+    width: 20px;
+    height: 20px;
+}
+
+model {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    height: 100vh;
+}
+
+.model h1 {
+    color: green;
+    font-size: 40px;
+    margin-bottom: 20px;
+}
+
+.model h2 {
+    color: #333;
+    font-size: 30px;
+    text-align: center;
+}
+
+.btn-capture {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-capture:hover {
     background-color: #0056b3;
 }

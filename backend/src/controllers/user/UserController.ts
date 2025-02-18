@@ -8,6 +8,8 @@ class UserController {
       name,
       email,
       mother,
+      housenumber,
+      complement,
       rg,
       cpf,
       tel,
@@ -23,7 +25,8 @@ class UserController {
       registrationCouncil,
       deficiency,
       deficiencyContext,
-      swornStatement
+      swornStatement,
+      term
     } = req.body;
 
     // Verificar se o arquivo foi enviado
@@ -40,6 +43,8 @@ class UserController {
         name,
         email,
         mother,
+        housenumber,
+        complement,
         rg,
         cpf,
         tel,
@@ -55,13 +60,17 @@ class UserController {
         registrationCouncil,
         deficiency,
         deficiencyContext,
-        swornStatement
+        swornStatement,
+        term
       });
 
       sendEmailService.execute({
+        protocol: user,
         name,
         email,
         mother,
+        housenumber,
+        complement,
         rg,
         cpf,
         tel,
@@ -77,7 +86,8 @@ class UserController {
         registrationCouncil,
         deficiency,
         deficiencyContext,
-        swornStatement
+        swornStatement,
+        term
       });
 
       res.status(201).json(user);

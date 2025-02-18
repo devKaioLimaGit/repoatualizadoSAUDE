@@ -4,6 +4,8 @@ interface UserRequest {
   name: string;
   email: string;
   mother: string;
+  housenumber: string;
+  complement: string;
   rg: string;
   cpf: string;
   tel: string;
@@ -20,6 +22,7 @@ interface UserRequest {
   deficiency: string;
   deficiencyContext: string;
   swornStatement: string;
+  term: string
 }
 
 // Função para formatar CPF (12345678901 → 123.456.789-01)
@@ -42,6 +45,8 @@ class UserService {
     name,
     email,
     mother,
+    housenumber,
+    complement,
     rg,
     cpf,
     tel,
@@ -58,6 +63,7 @@ class UserService {
     deficiency,
     deficiencyContext,
     swornStatement,
+    term
   }: UserRequest) {
     // Verificar se o email foi enviado
     if (!email) {
@@ -84,6 +90,8 @@ class UserService {
         protocol: String(protocolhasg),
         email,
         mother,
+        housenumber,
+        complement,
         rg,
         cpf: formatCPF(cpf),
         tel: formatPhone(tel),
@@ -100,6 +108,7 @@ class UserService {
         deficiency,
         deficiencyContext,
         swornStatement,
+        term
       },
     });
 

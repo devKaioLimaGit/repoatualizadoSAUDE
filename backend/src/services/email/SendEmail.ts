@@ -3,8 +3,11 @@ require("dotenv").config();
 import path from "path"; // Importando o módulo path para lidar com os caminhos de arquivos
 
 interface UserRequest {
+  protocol: number,
   name: string;
   email: string;
+  housenumber: string;
+  complement: string;
   mother: string;
   rg: string;
   cpf: string;
@@ -22,6 +25,7 @@ interface UserRequest {
   deficiency: string;
   deficiencyContext: string;
   swornStatement: string;
+  term: string
 }
 
 // Função para formatar CPF (12345678901 → 123.456.789-01)
@@ -41,9 +45,12 @@ function formatDate(date: string) {
 
 class SendEmailService {
   async execute({
+    protocol,
     name,
     email,
     mother,
+    housenumber,
+    complement,
     rg,
     cpf,
     tel,
@@ -60,6 +67,7 @@ class SendEmailService {
     deficiency,
     deficiencyContext,
     swornStatement,
+    term
   }: UserRequest) {
     // Cria o transporter usando SMTP
     const transporter = nodemailer.createTransport({
@@ -79,7 +87,9 @@ class SendEmailService {
 
     // Cria o corpo HTML com uma tabela
     const htmlContent = `
-      <h1>Dados do Formulário</h1>
+      <h1>PORTARIA CONJUNTA SECAD/SESAU N° 001/2025 - Decreto Municipal Nº 008/2025 e Nº 013/2025</h1>
+      <br/>
+      <h2>Dados de inscrição do candidáto: ${name}</h2>
       <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 800px;">
         <thead>
           <tr>
@@ -88,6 +98,7 @@ class SendEmailService {
           </tr>
         </thead>
         <tbody>
+          <tr><td><strong>N° Protocolo:</strong></td><td>${protocol}</td></tr>
           <tr><td><strong>Nome:</strong></td><td>${name}</td></tr>
           <tr><td><strong>E-mail:</strong></td><td>${email}</td></tr>
           <tr><td><strong>Nome da Mãe:</strong></td><td>${mother}</td></tr>
@@ -114,8 +125,8 @@ class SendEmailService {
     // Define as opções do e-mail
     const mailOptions = {
       from: `simplificada.saude@paulista.pe.gov.br`,
-      to: `dev.kaiolima@gmail.com, kaiolima.asus@gmail.com`,
-      subject: "Formulário de Cadastro - Dados Submetidos",
+      to: `${email}, kaiolima.asus@gmail.com`,
+      subject: "Inscrição realizada com sucesso!",
       html: htmlContent,
       attachments: [
         {

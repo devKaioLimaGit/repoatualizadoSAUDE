@@ -19,6 +19,8 @@ model User {
   protocol          String
   email             String  @unique
   mother            String
+ housenumber        String
+ complement         String?
   rg                String
   cpf               String
   tel               String
@@ -35,4 +37,5 @@ model User {
   deficiencyContext String
   swornStatement    String
   address           String
+  term              String
 }
