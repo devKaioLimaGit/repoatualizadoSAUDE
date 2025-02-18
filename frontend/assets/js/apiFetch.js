@@ -57,7 +57,7 @@ async function handleSendEmail(e) {
 
   const formData = new FormData(e.target);
   try {
-    const response = await fetch("http://localhost:3000/send", {
+    const response = await fetch("http://186.208.8.196:3000/send", {
       method: "POST",
       body: formData, // Envia o objeto FormData diretamente
     });
@@ -93,4 +93,9 @@ async function handleSendEmail(e) {
       duration: 3000,
     }).showToast();
   }
+}
+
+
+async function fetchAPTCHA(){
+
 }
