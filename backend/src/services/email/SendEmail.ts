@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 require("dotenv").config();
-import path from "path";  // Importando o módulo path para lidar com os caminhos de arquivos
+import path from "path"; // Importando o módulo path para lidar com os caminhos de arquivos
 
 interface UserRequest {
   name: string;
@@ -12,7 +12,7 @@ interface UserRequest {
   zip: string;
   address: string;
   city: string;
-  bairro: string;
+  neighborhood: string;
   birth: string;
   ageinyears: string;
   position: string;
@@ -22,6 +22,21 @@ interface UserRequest {
   deficiency: string;
   deficiencyContext: string;
   swornStatement: string;
+}
+
+// Função para formatar CPF (12345678901 → 123.456.789-01)
+function formatCPF(cpf: string) {
+  return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+}
+
+// Função para formatar telefone (81985801560 → (81) 98580-1560)
+function formatPhone(phone: string) {
+  return phone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+}
+
+// Função para formatar data (2002-10-31 → 31-10-2002)
+function formatDate(date: string) {
+  return date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$3-$2-$1");
 }
 
 class SendEmailService {
@@ -35,7 +50,7 @@ class SendEmailService {
     zip,
     address,
     city,
-    bairro,
+    neighborhood,
     birth,
     ageinyears,
     position,
@@ -44,7 +59,7 @@ class SendEmailService {
     registrationCouncil,
     deficiency,
     deficiencyContext,
-    swornStatement
+    swornStatement,
   }: UserRequest) {
     // Cria o transporter usando SMTP
     const transporter = nodemailer.createTransport({
@@ -52,7 +67,7 @@ class SendEmailService {
       port: 465,
       secure: true,
       tls: {
-        rejectUnauthorized: false // Ignora o erro do certificado
+        rejectUnauthorized: false, // Ignora o erro do certificado
       },
       auth: {
         user: "simplificada.saude@paulista.pe.gov.br",
@@ -77,13 +92,13 @@ class SendEmailService {
           <tr><td><strong>E-mail:</strong></td><td>${email}</td></tr>
           <tr><td><strong>Nome da Mãe:</strong></td><td>${mother}</td></tr>
           <tr><td><strong>RG:</strong></td><td>${rg}</td></tr>
-          <tr><td><strong>CPF:</strong></td><td>${cpf}</td></tr>
-          <tr><td><strong>Telefone:</strong></td><td>${tel}</td></tr>
+          <tr><td><strong>CPF:</strong></td><td>${formatCPF(cpf)}</td></tr>
+          <tr><td><strong>Telefone:</strong></td><td>${formatPhone(tel)}</td></tr>
           <tr><td><strong>CEP:</strong></td><td>${zip}</td></tr>
           <tr><td><strong>Endereço:</strong></td><td>${address}</td></tr>
           <tr><td><strong>Cidade:</strong></td><td>${city}</td></tr>
-          <tr><td><strong>Bairro:</strong></td><td>${bairro}</td></tr>
-          <tr><td><strong>Data de Nascimento:</strong></td><td>${birth}</td></tr>
+          <tr><td><strong>Bairro:</strong></td><td>${neighborhood}</td></tr>
+          <tr><td><strong>Data de Nascimento:</strong></td><td>${formatDate(birth)}</td></tr>
           <tr><td><strong>Idade:</strong></td><td>${ageinyears} anos</td></tr>
           <tr><td><strong>Cargo:</strong></td><td>${position}</td></tr>
           <tr><td><strong>Experiência de Saída:</strong></td><td>${experienceExit}</td></tr>
@@ -105,7 +120,7 @@ class SendEmailService {
       attachments: [
         {
           filename: `${cpf}.pdf`, // Nome do arquivo a ser enviado
-          path: path.join(__dirname, '..', '..', 'tmp', `${cpf}.pdf`), // Caminho para o arquivo
+          path: path.join(__dirname, "..", "..", "..", "tmp", `${cpf}.pdf`), // Caminho para o arquivo
         },
       ],
     };

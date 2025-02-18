@@ -23,8 +23,8 @@ model User {
   cpf               String
   tel               String
   zip               String
-  city              String?
-  bairro            String?
+  city              String
+  neighborhood      String
   birth             String
   ageinyears        String
   position          String
@@ -34,5 +34,5 @@ model User {
   deficiency        String
   deficiencyContext String
   swornStatement    String
-  address           String?  // Certifique-se de que o campo "address" esteja configurado corretamente no modelo
+  address           String
 }

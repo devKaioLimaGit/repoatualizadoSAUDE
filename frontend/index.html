@@ -1,429 +1,232 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <link rel="icon" href="#" type="image/x-icon" />
-    <title>Formulário Saúde</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
-    <header class="header">
-      <div class="sub-header">
-        <img src="#" alt="" width="10%" />
-        <h1>Formulário de Saúde</h1>
-        <img class="icon" src="#" alt="" width="10%" />
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--ICON-->
+  <link rel="icon" href="#" type="image/x-icon" />
+  <!--STYLES-->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <!--FONTE-->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
 
-    <div class="container">
-      <form class="form" onsubmit="handleSendEmail(event)">
-        <div class="form-group">
-          <label for="name">Nome Completo:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Digite seu nome completo..."
-            required
-          />
-        </div>
+  <!--SCRIPTS-->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
+  <script src="/assets/js/apiCep.js" defer></script>
+  <script src="assets/js/apiFetch.js" defer></script>
 
-        <div class="form-group">
-          <label for="mother">Nome da Mãe:</label>
-          <input
-            type="text"
-            id="mother"
-            name="mother"
-            placeholder="Digite o nome da sua mãe..."
-            required
-          />
-        </div>
+  <title>Formulário Saúde</title>
 
-        <div class="form-group">
-          <label for="email">E-mail:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Digite seu e-mail..."
-            required
-          />
-        </div>
+</head>
 
-        <div class="form-group">
-          <label for="rg">RG:</label>
-          <input
-            type="text"
-            id="rg"
-            name="rg"
-            placeholder="Digite seu RG..."
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="cpf">CPF:</label>
-          <input
-            type="text"
-            id="cpf"
-            name="cpf"
-            placeholder="Digite seu CPF..."
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="tel">Telefone (DDD):</label>
-          <input
-            type="text"
-            id="tel"
-            name="tel"
-            placeholder="Digite seu telefone..."
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="zip">CEP:</label>
-          <input
-            type="text"
-            id="zip"
-            name="zip"
-            placeholder="Digite seu CEP..."
-            required
-            onblur="getAddress(this.value)"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="address">Endereço:</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            placeholder="Preenchimento automático..."
-            
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="city">Cidade:</label>
-          <input
-            type="text"
-            id="city"
-            name="city"
-            placeholder="Preenchimento automático..."
-            
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="bairro">Bairro:</label>
-          <input
-            type="text"
-            id="bairro"
-            name="bairro"
-            placeholder="Preenchimento automático..."
-            
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="birth">Data de Nascimento:</label>
-          <input type="date" id="birth" name="birth" required />
-        </div>
-
-        <div class="form-group">
-          <label for="ageinyears">Idade no Ano de Inscrição:</label>
-          <input type="text" id="ageinyears" name="ageinyears" required />
-        </div>
-
-        <div class="form-group">
-          <label for="position">Cargo:</label>
-          <select name="position" id="position" required>
-            <option value="" selected disabled>SELECIONE</option>
-            <option value="assistente_social">ASSISTENTE SOCIAL</option>
-            <option value="auxiliar_de_farmacia">AUXILIAR DE FARMÁCIA</option>
-            <option value="aux_de_saude_bucal_plantonista">
-              AUX DE SAÚDE BUCAL (PLANTONISTA)
-            </option>
-            <option value="cuidadores_12x36">CUIDADORES 12X36</option>
-            <option value="farmaceutico">FARMACÊUTICO</option>
-            <option value="fonoaudiologo_40h">FONOAUDIÓLOGO 40H</option>
-            <option value="medico_cardiologista">MÉDICO CARDIOLOGISTA</option>
-            <option value="medico_dermatologista">MÉDICO DERMATOLOGISTA</option>
-            <option value="medico_emergencista">MÉDICO EMERGENCISTA</option>
-            <option value="medico_endocrinologista">
-              MÉDICO ENDOCRINOLOGISTA
-            </option>
-            <option value="medico_ginecologista_colpopista">
-              MÉDICO GINECOLOGISTA/COLPOPISTA
-            </option>
-            <option value="medico_nefrologista">MÉDICO NEFROLOGISTA</option>
-            <option value="medico_neurologista">MÉDICO NEUROLOGISTA</option>
-            <option value="medico_neuropediatra">MÉDICO NEUROPEDIATRA</option>
-            <option value="medico_ortopedista">MÉDICO ORTOPEDISTA</option>
-            <option value="medico_pediatra_emergencial">
-              MÉDICO PEDIATRA EMERGENCIAL
-            </option>
-            <option value="medico_pneumologista">MÉDICO PNEUMOLOGISTA</option>
-            <option value="medico_reumatologista">MÉDICO REUMATOLOGISTA</option>
-            <option value="medico_socorrista">MÉDICO SOCORRISTA</option>
-            <option value="medico_uroologista">MÉDICO UROLOGISTA</option>
-            <option value="medico_mastologista">MÉDICO MASTOLOGISTA</option>
-            <option value="psicologo">PSICÓLOGO</option>
-            <option value="psicomotricista">PSICOMOTRICISTA</option>
-            <option value="terapeuta_ocupacional">TERAPEUTA OCUPACIONAL</option>
-            <option value="tecnico_em_enfermagem_motolancia">
-              TÉCNICO EM ENFERMAGEM - MOTOLÂNCIA
-            </option>
-            <option value="profissional_educacao_fisica">
-              PROFISSIONAL EDUCAÇÃO FÍSICA
-            </option>
-            <option value="psiquiatra_infantil">
-              MÉDICO PSIQUIATRA INFANTIL
-            </option>
-            <option value="psiquiatra_adulto">MÉDICO PSIQUIATRA ADULTO</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="experienceExit"
-            >Tempo de Experiência Profissional Fora do SUS:</label
-          >
-          <select name="experienceExit" id="experienceExit" required>
-            <option value="" selected disabled>SELECIONE</option>
-            <option value="sem_experiencia">SEM EXPERIÊNCIA</option>
-            <option value="6_meses">6 MESES</option>
-            <option value="7_meses_a_2_anos">7 MESES A 2 ANOS</option>
-            <option value="2_anos_e_1_mes_a_5_anos">
-              2 ANOS E 1 MÊS A 5 ANOS
-            </option>
-            <option value="acima_de_5_anos">ACIMA DE 5 ANOS</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="experience"
-            >Tempo de Experiência Profissional no SUS:</label
-          >
-          <select name="experience" id="experience" required>
-            <option value="" selected disabled>SELECIONE</option>
-            <option value="sem_experiencia">SEM EXPERIÊNCIA</option>
-            <option value="6_meses">6 MESES</option>
-            <option value="7_meses_a_2_anos">7 MESES A 2 ANOS</option>
-            <option value="2_anos_e_1_mes_a_5_anos">
-              2 ANOS E 1 MÊS A 5 ANOS
-            </option>
-            <option value="acima_de_5_anos">ACIMA DE 5 ANOS</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="registrationCouncil"
-            >Número de Registro no Conselho de Classe:</label
-          >
-          <input
-            type="text"
-            id="registrationCouncil"
-            name="registrationCouncil"
-            placeholder="Digite o número..."
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="deficiency">Pessoa com Deficiência:</label>
-          <select name="deficiency" id="deficiency">
-            <option value="sim">SIM</option>
-            <option value="nao" selected>NÃO</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="deficiencyContext"
-            >Se sim, especifique a deficiência:</label
-          >
-          <input type="text" id="deficiencyContext" name="deficiencyContext" />
-        </div>
-
-        <div class="form-group">
-          <label for="swornStatement">Já foi voluntário?</label>
-          <select name="swornStatement" id="swornStatement">
-            <option value="sim">SIM</option>
-            <option value="nao" selected>NÃO</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="file">Anexo (PDF):</label>
-          <input
-            type="file"
-            id="file"
-            name="file"
-            accept=".pdf"
-            class="file-input"
-          />
-        </div>
-
-        <div class="form-actions">
-          <input class="btn" type="submit" value="Enviar" />
-          <input class="btn" type="reset" value="Limpar" />
-        </div>
-      </form>
+<body>
+  <header class="header">
+    <div class="sub-header">
+      <img src="#" alt="" width="10%" />
+      <h1>Formulário de Saúde</h1>
+      <img class="icon" src="#" alt="" width="10%" />
     </div>
+  </header>
 
-    <footer class="footer">
-      <img src="#" alt="" width="200px" />
-      <div style="font-size: 0.9rem; margin-bottom: 10px">
-        <h3 style="font-weight: 300">Secretaria Executiva de Saúde</h3>
-        <p>Endereço: Av. Mal. Floriano Peixoto, Centro, Paulista - PE</p>
-        <p>Telefone: (81) 99635-0311</p>
-        <p>Email: saude@paulista.pe.gov.br</p>
+  <div class="container">
+    <form class="form" onsubmit="handleSendEmail(event)">
+      <div class="form-group">
+        <label for="name">Nome Completo:</label>
+        <input type="text" id="name" name="name" placeholder="Digite seu nome completo..." required />
       </div>
-      <div
-        style="
+
+      <div class="form-group">
+        <label for="mother">Nome da Mãe:</label>
+        <input type="text" id="mother" name="mother" placeholder="Digite o nome da sua mãe..." required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" placeholder="Digite seu e-mail..." required />
+      </div>
+
+      <div class="form-group">
+        <label for="rg">RG:</label>
+        <input type="text" id="rg" name="rg" placeholder="Digite seu RG..." required />
+      </div>
+
+      <div class="form-group">
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF..." required />
+      </div>
+
+      <div class="form-group">
+        <label for="tel">Telefone (DDD):</label>
+        <input type="text" id="tel" name="tel" placeholder="Digite seu telefone..." required />
+      </div>
+
+      <div class="form-group">
+        <label for="zip">CEP:</label>
+        <input type="text" id="zip" name="zip" placeholder="Digite seu CEP..." required
+          onblur="getAddress(this.value)" />
+      </div>
+
+      <div class="form-group">
+        <label for="address">Endereço:</label>
+        <input type="text" id="address" name="address" placeholder="Preenchimento automático..." />
+      </div>
+
+      <div class="form-group">
+        <label for="city">Cidade:</label>
+        <input type="text" id="city" name="city" placeholder="Preenchimento automático..." />
+      </div>
+
+      <div class="form-group">
+        <label for="neighborhood">Bairro:</label>
+        <input type="text" id="neighborhood" name="neighborhood" placeholder="Preenchimento automático..." />
+      </div>
+
+      <div class="form-group">
+        <label for="birth">Data de Nascimento:</label>
+        <input type="date" id="birth" name="birth" required />
+      </div>
+
+      <div class="form-group">
+        <label for="ageinyears">Idade no Ano de Inscrição:</label>
+        <input type="text" id="ageinyears" name="ageinyears" required />
+      </div>
+
+      <div class="form-group">
+        <label for="position">Cargo:</label>
+        <select name="position" id="position" required>
+          <option value="" selected disabled>SELECIONE</option>
+          <option value="assistente_social">ASSISTENTE SOCIAL</option>
+          <option value="auxiliar_de_farmacia">AUXILIAR DE FARMÁCIA</option>
+          <option value="aux_de_saude_bucal_plantonista">
+            AUX DE SAÚDE BUCAL (PLANTONISTA)
+          </option>
+          <option value="cuidadores_12x36">CUIDADORES 12X36</option>
+          <option value="farmaceutico">FARMACÊUTICO</option>
+          <option value="fonoaudiologo_40h">FONOAUDIÓLOGO 40H</option>
+          <option value="medico_cardiologista">MÉDICO CARDIOLOGISTA</option>
+          <option value="medico_dermatologista">MÉDICO DERMATOLOGISTA</option>
+          <option value="medico_emergencista">MÉDICO EMERGENCISTA</option>
+          <option value="medico_endocrinologista">
+            MÉDICO ENDOCRINOLOGISTA
+          </option>
+          <option value="medico_ginecologista_colpopista">
+            MÉDICO GINECOLOGISTA/COLPOPISTA
+          </option>
+          <option value="medico_nefrologista">MÉDICO NEFROLOGISTA</option>
+          <option value="medico_neurologista">MÉDICO NEUROLOGISTA</option>
+          <option value="medico_neuropediatra">MÉDICO NEUROPEDIATRA</option>
+          <option value="medico_ortopedista">MÉDICO ORTOPEDISTA</option>
+          <option value="medico_pediatra_emergencial">
+            MÉDICO PEDIATRA EMERGENCIAL
+          </option>
+          <option value="medico_pneumologista">MÉDICO PNEUMOLOGISTA</option>
+          <option value="medico_reumatologista">MÉDICO REUMATOLOGISTA</option>
+          <option value="medico_socorrista">MÉDICO SOCORRISTA</option>
+          <option value="medico_uroologista">MÉDICO UROLOGISTA</option>
+          <option value="medico_mastologista">MÉDICO MASTOLOGISTA</option>
+          <option value="psicologo">PSICÓLOGO</option>
+          <option value="psicomotricista">PSICOMOTRICISTA</option>
+          <option value="terapeuta_ocupacional">TERAPEUTA OCUPACIONAL</option>
+          <option value="tecnico_em_enfermagem_motolancia">
+            TÉCNICO EM ENFERMAGEM - MOTOLÂNCIA
+          </option>
+          <option value="profissional_educacao_fisica">
+            PROFISSIONAL EDUCAÇÃO FÍSICA
+          </option>
+          <option value="psiquiatra_infantil">
+            MÉDICO PSIQUIATRA INFANTIL
+          </option>
+          <option value="psiquiatra_adulto">MÉDICO PSIQUIATRA ADULTO</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="experienceExit">Tempo de Experiência Profissional Fora do SUS:</label>
+        <select name="experienceExit" id="experienceExit" required>
+          <option value="" selected disabled>SELECIONE</option>
+          <option value="sem_experiencia">SEM EXPERIÊNCIA</option>
+          <option value="6_meses">6 MESES</option>
+          <option value="7_meses_a_2_anos">7 MESES A 2 ANOS</option>
+          <option value="2_anos_e_1_mes_a_5_anos">
+            2 ANOS E 1 MÊS A 5 ANOS
+          </option>
+          <option value="acima_de_5_anos">ACIMA DE 5 ANOS</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="experience">Tempo de Experiência Profissional no SUS:</label>
+        <select name="experience" id="experience" required>
+          <option value="" selected disabled>SELECIONE</option>
+          <option value="sem_experiencia">SEM EXPERIÊNCIA</option>
+          <option value="6_meses">6 MESES</option>
+          <option value="7_meses_a_2_anos">7 MESES A 2 ANOS</option>
+          <option value="2_anos_e_1_mes_a_5_anos">
+            2 ANOS E 1 MÊS A 5 ANOS
+          </option>
+          <option value="acima_de_5_anos">ACIMA DE 5 ANOS</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="registrationCouncil">Número de Registro no Conselho de Classe:</label>
+        <input type="text" id="registrationCouncil" name="registrationCouncil" placeholder="Digite o número..."
+          required />
+      </div>
+      <div class="form-group">
+        <label for="deficiency">Pessoa com Deficiência:</label>
+        <select name="deficiency" id="deficiency">
+          <option value="sim">SIM</option>
+          <option value="nao" selected>NÃO</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="deficiencyContext">Se sim, especifique a deficiência:</label>
+        <input type="text" id="deficiencyContext" name="deficiencyContext" />
+      </div>
+
+      <div class="form-group">
+        <label for="swornStatement">Já foi voluntário?</label>
+        <select name="swornStatement" id="swornStatement">
+          <option value="sim">SIM</option>
+          <option value="nao" selected>NÃO</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="file">Anexo (PDF):</label>
+        <input type="file" id="file" name="file" accept=".pdf" class="file-input" />
+      </div>
+
+      <div class="form-actions">
+        <input class="btn" type="submit" value="Enviar" />
+        <input class="btn" type="reset" value="Limpar" />
+      </div>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <img src="#" alt="" width="200px" />
+    <div style="font-size: 0.9rem; margin-bottom: 10px">
+      <h3 style="font-weight: 300">Secretaria Executiva de Saúde</h3>
+      <p>Endereço: Av. Mal. Floriano Peixoto, Centro, Paulista - PE</p>
+      <p>Telefone: (81) 99635-0311</p>
+      <p>Email: saude@paulista.pe.gov.br</p>
+    </div>
+    <div style="
           font-size: 0.8rem;
           border-top: 1px solid #fff;
           padding-top: 10px;
           margin-top: 20px;
-        "
-      >
-        <p>
-          &copy; 2025 Prefeitura Municipal de Paulista - Todos os direitos
-          reservados.
-        </p>
-      </div>
-    </footer>
+        ">
+      <p>
+        &copy; 2025 Prefeitura Municipal de Paulista - Todos os direitos
+        reservados.
+      </p>
+    </div>
+  </footer>
+</body>
 
-    <script>
-      async function getAddress(cep) {
-        cep = cep.replace(/\D/g, ""); // Remove non-numeric characters
-        if (cep != "") {
-          var validateCep = /^[0-9]{8}$/; // CEP format validation
-          if (validateCep.test(cep)) {
-            try {
-              const response = await fetch(
-                `https://viacep.com.br/ws/${cep}/json/`
-              );
-              const data = await response.json();
-
-              if (!data.erro) {
-                // Verifica se os dados esperados existem antes de atribuí-los aos campos
-                document.getElementById("address").value =
-                  data.logradouro || "";
-                document.getElementById("city").value = data.localidade || "";
-                document.getElementById("bairro").value = data.bairro || "";
-              } else {
-                // Caso o CEP não seja encontrado, limpa os campos
-                alert("CEP não encontrado.");
-                document.getElementById("address").value = "";
-                document.getElementById("city").value = "";
-                document.getElementById("bairro").value = "";
-              }
-            } catch (error) {
-              // Em caso de erro de rede, limpa os campos
-              alert("Erro ao consultar o CEP.");
-              document.getElementById("address").value = "";
-              document.getElementById("city").value = "";
-              document.getElementById("bairro").value = "";
-            }
-          } else {
-            alert("Formato de CEP inválido.");
-            // Limpa os campos caso o CEP não tenha o formato correto
-            document.getElementById("address").value = "";
-            document.getElementById("city").value = "";
-            document.getElementById("bairro").value = "";
-          }
-        }
-      }
-    </script>
-
-    <script>
-async function handleSendEmail(e) {
-  e.preventDefault();
-
-  // Verifica se os campos necessários estão preenchidos
-  const name = document.getElementById("name").value.trim();
-  const mother = document.getElementById("mother").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const rg = document.getElementById("rg").value.trim();
-  const cpf = document.getElementById("cpf").value.trim();
-  const tel = document.getElementById("tel").value.trim();
-  const zip = document.getElementById("zip").value.trim();
-  const address = document.getElementById("address").value.trim();
-  const city = document.getElementById("city").value.trim();
-  const bairro = document.getElementById("bairro").value.trim();
-  const birth = document.getElementById("birth").value.trim();
-  const ageinyears = document.getElementById("ageinyears").value.trim();
-  const position = document.getElementById("position").value.trim();
-  const experienceExit = document.getElementById("experienceExit").value.trim();
-  const experience = document.getElementById("experience").value.trim();
-  const registrationCouncil = document.getElementById("registrationCouncil").value.trim();
-  const deficiency = document.getElementById("deficiency").value.trim();
-
-  // Validação de campos obrigatórios
-  if (!name || !mother || !email || !rg || !cpf || !tel || !zip || !birth || !ageinyears || !position || !experienceExit || !experience || !registrationCouncil) {
-    Toastify({
-      text: "Por favor, preencha todos os campos obrigatórios.",
-      backgroundColor: "linear-gradient(to right, #f44336, #e57373)",
-      duration: 3000,
-    }).showToast();
-    return; // Não envia o formulário se faltar algum dado
-  }
-
-  // Verifica se os campos de endereço são obrigatórios
-  if (!address || !city || !bairro) {
-    Toastify({
-      text: "Por favor, preencha o endereço completo com o CEP.",
-      backgroundColor: "linear-gradient(to right, #f44336, #e57373)",
-      duration: 3000,
-    }).showToast();
-    return; // Não envia o formulário sem o endereço
-  }
-
-  const formData = new FormData(e.target);
-
-  try {
-    const response = await fetch("http://localhost:3000/send", {
-      method: "POST",
-      body: formData, // Envia o objeto FormData diretamente
-    });
-
-    if (response.ok) {
-      const responseData = await response.json(); // Alterei de 'data' para 'responseData'
-      console.log(responseData)
-      Toastify({
-        text: `Cadastro realizado com sucesso seu protocolo é : ${responseData} `,
-        backgroundColor: "linear-gradient(to right, #4caf50, #81c784)",
-        duration: 100000,
-      }).showToast();
-      e.target.reset(); // Limpa o formulário após o envio
-    } else {
-      Toastify({
-        text: "Ocorreu um erro ao enviar a solicitação.",
-        backgroundColor: "linear-gradient(to right, #f44336, #e57373)",
-        duration: 3000,
-      }).showToast();
-    }
-  } catch (error) {
-    Toastify({
-      text: "Erro de rede. Tente novamente mais tarde.",
-      backgroundColor: "linear-gradient(to right, #f44336, #e57373)",
-      duration: 3000,
-    }).showToast();
-  }
-}
-
-    </script>
-  </body>
 </html>

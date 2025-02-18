@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserService } from "../../services/user/userService";
-import { SendEmailService } from "../../services/SendEmail";
+import { SendEmailService } from "../../services/email/SendEmail";
 
 class UserController {
   async handle(req: Request, res: Response): Promise<void> {
@@ -14,7 +14,7 @@ class UserController {
       zip,
       address,
       city,
-      bairro,
+      neighborhood,
       birth,
       ageinyears,
       position,
@@ -46,7 +46,7 @@ class UserController {
         zip,
         address,
         city,
-        bairro,
+        neighborhood,
         birth,
         ageinyears,
         position,
@@ -68,7 +68,7 @@ class UserController {
         zip,
         address,
         city,
-        bairro,
+        neighborhood,
         birth,
         ageinyears,
         position,
