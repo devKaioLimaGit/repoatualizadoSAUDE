@@ -24,7 +24,9 @@ interface UserRequest {
   registrationCouncil: string;
   deficiency: string;
   deficiencyContext: string;
-  swornStatement: string;
+  advice: string;
+  jury: string;
+  organ: string;
   term: string
 }
 
@@ -66,7 +68,9 @@ class SendEmailService {
     registrationCouncil,
     deficiency,
     deficiencyContext,
-    swornStatement,
+    advice,
+    jury,
+    organ,
     term
   }: UserRequest) {
     // Cria o transporter usando SMTP
@@ -117,7 +121,7 @@ class SendEmailService {
           <tr><td><strong>Registro no Conselho:</strong></td><td>${registrationCouncil}</td></tr>
           <tr><td><strong>Deficiência:</strong></td><td>${deficiency}</td></tr>
           <tr><td><strong>Contexto da Deficiência:</strong></td><td>${deficiencyContext}</td></tr>
-          <tr><td><strong>Declaração de Bens:</strong></td><td>${swornStatement}</td></tr>
+          <tr><td><strong>Declaração de Bens:</strong></td><td>${jury}</td></tr>
         </tbody>
       </table>
     `;
@@ -125,7 +129,7 @@ class SendEmailService {
     // Define as opções do e-mail
     const mailOptions = {
       from: `simplificada.saude@paulista.pe.gov.br`,
-      to: `${email}, kaiolima.asus@gmail.com`,
+      to: `${email}, simplificada.saude@paulista.pe.gov.br`,
       subject: "Inscrição realizada com sucesso!",
       html: htmlContent,
       attachments: [

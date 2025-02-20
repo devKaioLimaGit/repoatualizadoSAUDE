@@ -34,6 +34,9 @@ async function handleSendEmail(e) {
   const experience = document.getElementById("experience").value.trim();
   const registrationCouncil = document.getElementById("registrationCouncil").value.trim();
   const deficiency = document.getElementById("deficiency").value.trim();
+  const advice = document.getElementById("advice").value.trim();
+  const jury = document.getElementById("jury").value.trim();
+  const organ = document.getElementById("organ").value.trim();
   const container = document.querySelector(".container")
   // Validação de campos obrigatórios
   if (!name || !mother || !email || !rg || !cpf || !tel || !zip || !birth || !ageinyears || !position || !experienceExit || !experience || !registrationCouncil) {
@@ -57,7 +60,7 @@ async function handleSendEmail(e) {
 
   const formData = new FormData(e.target);
   try {
-    const response = await fetch("http://186.208.8.196:3000/send", {
+    const response = await fetch("https://186.208.8.196:3000/send", {
       method: "POST",
       body: formData, // Envia o objeto FormData diretamente
     });
@@ -93,9 +96,4 @@ async function handleSendEmail(e) {
       duration: 3000,
     }).showToast();
   }
-}
-
-
-async function fetchAPTCHA(){
-
 }

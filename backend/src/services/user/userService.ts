@@ -21,8 +21,10 @@ interface UserRequest {
   registrationCouncil: string;
   deficiency: string;
   deficiencyContext: string;
-  swornStatement: string;
-  term: string
+  advice: string;
+  jury : string;
+  organ: string;
+  term: string;
 }
 
 // Função para formatar CPF (12345678901 → 123.456.789-01)
@@ -62,7 +64,9 @@ class UserService {
     registrationCouncil,
     deficiency,
     deficiencyContext,
-    swornStatement,
+    advice,
+    jury,
+    organ,
     term
   }: UserRequest) {
     // Verificar se o email foi enviado
@@ -107,7 +111,9 @@ class UserService {
         registrationCouncil,
         deficiency,
         deficiencyContext,
-        swornStatement,
+        advice,
+        jury,
+        organ,
         term
       },
     });

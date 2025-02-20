@@ -25,7 +25,9 @@ class UserController {
       registrationCouncil,
       deficiency,
       deficiencyContext,
-      swornStatement,
+      advice,
+      jury,
+      organ,
       term
     } = req.body;
 
@@ -60,7 +62,9 @@ class UserController {
         registrationCouncil,
         deficiency,
         deficiencyContext,
-        swornStatement,
+        advice,
+        jury,
+        organ,
         term
       });
 
@@ -86,7 +90,9 @@ class UserController {
         registrationCouncil,
         deficiency,
         deficiencyContext,
-        swornStatement,
+        advice,
+        jury,
+        organ,
         term
       });
 

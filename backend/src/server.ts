@@ -1,11 +1,13 @@
-import express, { Request, Response, NextFunction } from "express"
-import "express-async-errors"
-import dotenv from "dotenv"
+import express, { Request, Response, NextFunction } from "express";
+import https from "https";
+import fs from "fs";
+import "express-async-errors";
+import dotenv from "dotenv";
 import cors from "cors";
 import router from "./router";
-import path = require("path");
+
 dotenv.config();
-const { PORT } = process.env
+const { PORT } = process.env;
 
 const app = express();
 app.use(cors());
@@ -21,5 +23,14 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json("Internal error.");
 });
 
+// Caminhos dos arquivos do Let's Encrypt (certificados)
+const sslOptions = {
+  key: fs.readFileSync("/etc/letsencrypt/live/simplificada.saude.paulista.pe.gov.br/privkey.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/live/simplificada.saude.paulista.pe.gov.br/fullchain.pem"),
+  ca: fs.readFileSync("/etc/letsencrypt/live/simplificada.saude.paulista.pe.gov.br/chain.pem")
+};
 
-app.listen(PORT, () => { console.log(`Servidor rodando na porta ${PORT}`) })
+// Inicia o servidor HTTPS usando os certificados SSL do Let's Encrypt
+https.createServer(sslOptions, app).listen(PORT, () => {
+  console.log(`Servidor HTTPS rodando na porta ${PORT}`);
+});

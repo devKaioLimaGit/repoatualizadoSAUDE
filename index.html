@@ -16,7 +16,7 @@
 
   <!--SCRIPTS-->
   <script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
-  <script src="/assets/js/apiCep.js" defer></script>
+  <script src="assets/js/apiCep.js" defer></script>
   <script src="assets/js/apiFetch.js" defer></script>
 
 
@@ -32,8 +32,8 @@
 <body>
   <header class="header">
     <div class="sub-header">
-      <img src="assets/img/logoprefeitura.png" alt="" width="10%" />
-      <h1 style="font-weight: 400;">Secretaia Múnicipal de Saúde<br>Seleção Pública Simplificada</h1>
+      <img src="assets/img/logoprefeitura.png" alt="" width="16%" />
+      <h1 style="font-weight: 400;">Secretaria Municipal de Saúde<br>Seleção Pública Simplificada - 2025<br></h1>
       <img class="icon" src="#" alt="" width="10%" />
     </div>
   </header>
@@ -46,7 +46,7 @@
       </div>
 
       <div class="form-group">
-        <label for="mother">Nome da Mãe:</label>
+        <label for="mother">Nome da Mãe Completo:</label>
         <input type="text" id="mother" name="mother" placeholder="Digite o nome da sua mãe..." required pattern="[A-Za-zÀ-ÿ\s]+" title="Apenas letras e espaços são permitidos"/>
       </div>
 
@@ -56,22 +56,31 @@
       </div>
 
       <div class="form-group">
-        <label for="rg">RG:</label>
+        <label for="rg">RG (Sem Ponto ou Hífen):</label>
         <input type="text" id="rg" name="rg" placeholder="Digite seu RG..." required oninput="this.value = this.value.replace(/[^\d]/g, '').slice(0,11)"/>
       </div>
 
       <div class="form-group">
-        <label for="cpf">CPF:</label>
+        <label for="organ">Orgão Emissor:</label>
+        <input type="text" id="organ" name="organ" placeholder="Digite o orgão emissor..." required 
+          oninput="this.value = this.value.replace(/[^A-Za-z0-9\/]/g, '').slice(0, 21)" />
+      </div>
+      
+      
+
+
+      <div class="form-group">
+        <label for="cpf">CPF (Sem Ponto ou Hífen):</label>
         <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF..." required oninput="this.value = this.value.replace(/[^\d]/g, '').slice(0,11)" />
       </div>
 
       <div class="form-group">
-        <label for="tel">Telefone (DDD):</label>
-        <input type="text" id="tel" name="tel" placeholder="Digite seu telefone..." required oninput="this.value = this.value.replace(/[^\d]/g, '').slice(0,11)" />
+        <label for="tel">Telefone (DDD + Número Sem Hífen):</label>
+        <input type="text" id="tel" name="tel" placeholder="DDNNNNNNN" required oninput="this.value = this.value.replace(/[^\d]/g, '').slice(0,11)" />
       </div>
 
       <div class="form-group">
-        <label for="zip">CEP:</label>
+        <label for="zip">CEP (Sem Ponto ou Hífen):</label>
         <input type="text" id="zip" name="zip" placeholder="Digite seu CEP..." required oninput="this.value = this.value.replace(/[^\d]/g, '').slice(0, 8)"
           onblur="getAddress(this.value) " />
       </div>
@@ -81,7 +90,7 @@
         <input type="text" id="address" name="address" placeholder="Preenchimento automático..." required pattern="[A-Za-zÀ-ÿ\s]+" title="Apenas letras e espaços são permitidos"/>
       </div>
       <div class="form-group">
-        <label for="housenumber">Casa N°:</label>
+        <label for="housenumber">Número:</label>
         <input type="text" id="housenumber" name="housenumber" placeholder="Digite o número da casa..." required oninput="this.value = this.value.replace(/[^\d]/g, '').slice(0, 2)"/>
       </div>
 
@@ -106,39 +115,39 @@
       </div>
 
       <div class="form-group">
-        <label for="ageinyears">Idade no Ano de Inscrição:</label>
+        <label for="ageinyears">Idade do candidato no ano de inscrição:</label>
         <input type="text" id="ageinyears" name="ageinyears" required oninput="this.value = this.value.replace(/[^\d]/g, '').slice(0,2)"/>
       </div>
 
       <div class="form-group">
-        <label for="position">Cargo:</label>
+        <label for="position">Cargo Pretendido:</label>
         <select name="position" id="position" required>
           <option value="" selected disabled>SELECIONE</option>
-          <option value="assistente_social">ASSISTENTE SOCIAL</option>
-          <option value="auxiliar_de_farmacia">AUXILIAR DE FARMÁCIA</option>
-          <option value="aux_de_saude_bucal_plantonista">
-            AUX DE SAÚDE BUCAL (PLANTONISTA)
+          <option value="0000 CIRURGIÃO-DENTISTA - 24H">0000 CIRURGIÃO-DENTISTA - 24H</option>
+          <option value="1084 AUXILIAR DE SAÚDE - 24H">1084 AUXILIAR DE SAÚDE - 24H</option>
+          <option value="0000 ASSISTENTE SOCIAL 20H">
+           0000 ASSISTENTE SOCIAL 20H
           </option>
-          <option value="cuidadores_12x36">CUIDADORES 12X36</option>
-          <option value="farmaceutico">FARMACÊUTICO</option>
-          <option value="fonoaudiologo_40h">FONOAUDIÓLOGO 40H</option>
-          <option value="medico_cardiologista">MÉDICO CARDIOLOGISTA</option>
-          <option value="medico_dermatologista">MÉDICO DERMATOLOGISTA</option>
-          <option value="medico_emergencista">MÉDICO EMERGENCISTA</option>
-          <option value="medico_endocrinologista">
-            MÉDICO ENDOCRINOLOGISTA
+          <option value=" 0000 MÉDICO PEDIATRA EMERGENCISTA - 20H">0000 MÉDICO PEDIATRA EMERGENCISTA 20H</option>
+          <option value="1076 GINECOLOGISTA/COLPOSCOPISTA 20H">1076 GINECOLOGISTA/COLPOSCOPISTA 20H</option>
+          <option value="1089 PROFISSIONAL DE EDUCAÇÃO FÍSICA 20H">1089 PROFISSIONAL DE EDUCAÇÃO FÍSICA 20H</option>
+          <option value="1113 REUMATOLOGISTA ">1113 REUMATOLOGISTA 20H</option>
+          <option value="1077 MÉDICO PSIQUIATRA ADULTO 20H">1077 MÉDICO PSIQUIATRA ADULTO 20H</option>
+          <option value="1091 MÉDICO PSIQUIATRA INFANTIL 20H">1091 MÉDICO PSIQUIATRA INFANTIL 20H</option>
+          <option value="0000 PSICOMOTRICISTA 30H">
+            0000 PSICOMOTRICISTA 30H
           </option>
-          <option value="medico_ginecologista_colpopista">
-            MÉDICO GINECOLOGISTA/COLPOPISTA
+          <option value="1097 TERAPEUTA OCUPACIONAL 20H">
+            1097 TERAPEUTA OCUPACIONAL 20H
           </option>
-          <option value="medico_nefrologista">MÉDICO NEFROLOGISTA</option>
-          <option value="medico_neurologista">MÉDICO NEUROLOGISTA</option>
-          <option value="medico_neuropediatra">MÉDICO NEUROPEDIATRA</option>
-          <option value="medico_ortopedista">MÉDICO ORTOPEDISTA</option>
-          <option value="medico_pediatra_emergencial">
-            MÉDICO PEDIATRA EMERGENCIAL
+          <option value="1099 FOOAUDIÓLOGO 40H">1099 FOOAUDIÓLOGO 40H</option>
+          <option value="1109 ENDOCRINOLOGISTA 20H">1109 ENDOCRINOLOGISTA 20H</option>
+          <option value="0000 UROLOGISTA 24H">0000 UROLOGISTA 24H</option>
+          <option value="1107 CARDIOLOGISTA 20H">1107 CARDIOLOGISTA 20H</option>
+          <option value="0000 CONSUTOR SOCORRISTA 24H">
+            0000 CONSUTOR SOCORRISTA 24H
           </option>
-          <option value="medico_pneumologista">MÉDICO PNEUMOLOGISTA</option>
+          <option value="1092 NEUROLOGISTA 20H">1092 NEUROLOGISTA 20H</option>
           <option value="medico_reumatologista">MÉDICO REUMATOLOGISTA</option>
           <option value="medico_socorrista">MÉDICO SOCORRISTA</option>
           <option value="medico_uroologista">MÉDICO UROLOGISTA</option>
@@ -160,7 +169,7 @@
       </div>
 
       <div class="form-group">
-        <label for="experienceExit">Tempo de Experiência Profissional Fora do SUS:</label>
+        <label for="experienceExit">Tempo de Experiência Profissional (Fora do SUS):</label>
         <select name="experienceExit" id="experienceExit" required>
           <option value="" selected disabled>SELECIONE</option>
           <option value="sem_experiencia">SEM EXPERIÊNCIA</option>
@@ -174,7 +183,7 @@
       </div>
 
       <div class="form-group">
-        <label for="experience">Tempo de Experiência Profissional no SUS:</label>
+        <label for="experience">Tempo de Experiência Profissional (No SUS):</label>
         <select name="experience" id="experience" required>
           <option value="" selected disabled>SELECIONE</option>
           <option value="sem_experiencia">SEM EXPERIÊNCIA</option>
@@ -187,10 +196,17 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="registrationCouncil">Número de Registro no Conselho de Classe:</label>
-        <input type="text" id="registrationCouncil" name="registrationCouncil" placeholder="Digite o número..."
-          required oninput="this.value = this.value.replace(/[^\d]/g, '').slice(0,16)" />
+        <label for="advice">Conselho de Classe:</label>
+        <input type="text" id="advice" name="advice" placeholder="Digite o nome do conselho..."
+          required pattern="[A-Za-zÀ-ÿ\s]{1,50}" maxlength="50" />
       </div>
+      
+      <div class="form-group">
+        <label for="registrationCouncil">Número de Registro no Conselho de Classe:</label>
+        <input type="text" id="registrationCouncil" name="registrationCouncil" placeholder="Digite o número do conselho..."
+          required oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '').slice(0,16)" />
+      </div>
+      
       <div class="form-group">
         <label for="deficiency">Pessoa com Deficiência:</label>
         <select name="deficiency" id="deficiency">
@@ -200,21 +216,22 @@
       </div>
 
       <div class="form-group">
-        <label for="deficiencyContext">Se sim, especifique a deficiência se não digite (Não Tenho):</label>
+        <label for="deficiencyContext">Se SIM, especifique a deficiência. Se Não, digite: NÃO TENHO:</label>
         <input type="text" id="deficiencyContext" name="deficiencyContext" required pattern="[A-Za-zÀ-ÿ\s]+" title="Apenas letras e espaços são permitidos"/>
       </div>
 
       <div class="form-group">
-        <label for="swornStatement">Já foi voluntário?</label>
-        <select name="swornStatement" id="swornStatement">
+        <label for="jury">Já atuou como Jurado em Tribunal do Juri?</label>
+        <select name="jury" id="jury">
           <option value="sim">SIM</option>
           <option value="nao" selected>NÃO</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="file">Anexo (PDF):</label>
-        <input type="file" id="file" name="file" accept=".pdf" class="file-input" />
+        <label for="file">Arquivo único <strong>(PDF, Tamanho Máximo 10MB):</strong></label>
+        <input type="file" id="file" name="file" accept=".pdf" class="file-input" onchange="checkFileSize()" />
+        <small id="fileSizeError" style="color: red; display: none;">O arquivo deve ter no máximo 10MB.</small>
       </div>
 
       <div class="form-term">
